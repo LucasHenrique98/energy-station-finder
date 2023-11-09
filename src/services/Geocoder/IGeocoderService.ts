@@ -12,5 +12,5 @@ export type GeoLocationAddressReturn = {
 };
 
 export interface IGeocoderService {
-  searchByGeoLocation(coords: GeoLocation): GeoLocationAddressReturn;
+  searchByGeoLocation(coords: GeoLocation): Promise<GeoLocationAddressReturn>;
 }
