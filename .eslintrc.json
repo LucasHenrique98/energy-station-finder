@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:prettier/recommended",
+    "eslint-config-prettier"
+  ],
+  "rules": {
+    "import/no-unresolved": "off",
+    "react/jsx-filename-extension": "off",
+    "object-curly-spacing": "error"
+  },
+  "plugins": ["prettier"]
+}
