@@ -1,13 +1,17 @@
 import { createContext } from 'react';
 import { IEnergyPoint } from '../features/EnergyPointFinder/gateways/IEnergyPoint';
 import { EnergyPointGatewayMemory } from '../features/EnergyPointFinder/gateways/EnergyPointGatewayMemory';
+import { IGeocoderService } from '../services/Geocoder/IGeocoderService';
+import { RNGeocoding } from '../services/Geocoder/RNGeocoding';
 
 type DependenciesTypes = {
   energyPointsGateway: IEnergyPoint;
+  geocoderService: IGeocoderService;
 };
 
 const dependencies: DependenciesTypes = {
   energyPointsGateway: new EnergyPointGatewayMemory(),
+  geocoderService: new RNGeocoding(),
 };
 
 export const DependencyInjectionContext =
