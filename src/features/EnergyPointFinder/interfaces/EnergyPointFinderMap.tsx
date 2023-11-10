@@ -66,6 +66,11 @@ export default function EnergyPointFinderMap() {
     });
   };
 
+  const closeEnergyStationModal = useCallback(
+    () => setIsEnergyStationDetailsOpen(false),
+    [],
+  );
+
   useFocusEffect(
     useCallback(() => {
       getCurrentPosition();
@@ -80,7 +85,10 @@ export default function EnergyPointFinderMap() {
     <View style={styles.container}>
       <SearchBar />
       {isEnergyStationDetailsOpen && (
-        <EnergyStationDetails address={energyStationDetails.address} />
+        <EnergyStationDetails
+          closeDetailsModal={closeEnergyStationModal}
+          address={energyStationDetails.address}
+        />
       )}
       <MapView
         provider="google"

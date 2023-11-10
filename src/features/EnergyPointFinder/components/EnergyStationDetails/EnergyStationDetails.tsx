@@ -10,15 +10,17 @@ import {
 
 type EnergyStationDetailsProps = {
   address?: string;
+  closeDetailsModal: () => void;
 };
 
 export default function EnergyStationDetails({
   address,
+  closeDetailsModal,
 }: EnergyStationDetailsProps) {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={closeDetailsModal}>
           <FontAwesomeIcon
             size={30}
             style={styles.closeIcon}
