@@ -55,9 +55,7 @@ export default function EnergyPointFinderMap() {
   };
 
   const handleEnergyStationMarkerPress = (coords: coordinate) => {
-    getAddressAccordingCoords(geocoderService, coords).then(address => {
-      console.log(address);
-    });
+    getAddressAccordingCoords(geocoderService, coords).then(address => {});
   };
 
   useFocusEffect(
