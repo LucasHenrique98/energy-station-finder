@@ -29,6 +29,7 @@ export default function EnergyPointFinderMap() {
   >([]);
   const [isEnergyStationDetailsOpen, setIsEnergyStationDetailsOpen] =
     useState(false);
+  const [energyStationDetails, setEnergyStationDetails] = useState({});
 
   const { energyPointsGateway, geocoderService } = useContext(
     DependencyInjectionContext,
