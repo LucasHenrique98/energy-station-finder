@@ -4,5 +4,5 @@ export async function getAddressAccordingCoords(
   geocoder: IGeocoderService,
   coords: { latitude: number; longitude: number },
 ) {
-  return await geocoder.searchByGeoLocation(coords);
+  return geocoder.searchByGeoLocation(coords);
 }

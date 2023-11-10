@@ -9,10 +9,11 @@ export class RNGeocoding implements IGeocoderService {
   async searchByGeoLocation(
     coords: GeoLocation,
   ): Promise<GeoLocationAddressReturn> {
-    const address = await Geocoder.from(coords);
+    const { results } = await Geocoder.from(coords);
+    const formattedAddress = results[0].formatted_address;
 
     return {
-      address: '',
+      address: formattedAddress,
       city: '',
       number: 1,
       state: '',

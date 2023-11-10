@@ -5,8 +5,14 @@ import Geolocation from '@react-native-community/geolocation';
 import { useFocusEffect } from '@react-navigation/native';
 import SearchBar from '../components/SearchBar';
 import { DependencyInjectionContext } from '../../../contexts/DependencyInjection.context';
+import { getAddressAccordingCoords } from '../usecases';
 
 const { width, height } = Dimensions.get('screen');
+
+type coordinate = {
+  latitude: number;
+  longitude: number;
+};
 
 export default function EnergyPointFinderMap() {
   const [region, setRegion] = useState<
@@ -19,10 +25,14 @@ export default function EnergyPointFinderMap() {
     | undefined
   >(undefined);
   const [energyStationLocations, setEnergyStationLocations] = useState<
-    Array<{ latitude: number; longitude: number }>
+    Array<coordinate>
   >([]);
+  const [isEnergyStationDetailsOpen, setIsEnergyStationDetailsOpen] =
+    useState(false);
 
-  const { energyPointsGateway } = useContext(DependencyInjectionContext);
+  const { energyPointsGateway, geocoderService } = useContext(
+    DependencyInjectionContext,
+  );
 
   const getEnergyStationLocations = async () => {
     const locations = await energyPointsGateway.getEnergyStationsPoint();
@@ -42,6 +52,12 @@ export default function EnergyPointFinderMap() {
       () => {},
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
+  };
+
+  const handleEnergyStationMarkerPress = (coords: coordinate) => {
+    getAddressAccordingCoords(geocoderService, coords).then(address => {
+      console.log(address);
+    });
   };
 
   useFocusEffect(
@@ -75,6 +91,9 @@ export default function EnergyPointFinderMap() {
         {energyStationLocations.map(location => {
           return (
             <Marker
+              onPress={({ nativeEvent: { coordinate } }) =>
+                handleEnergyStationMarkerPress(coordinate)
+              }
               key={location.latitude}
               coordinate={{
                 latitude: location.latitude,
