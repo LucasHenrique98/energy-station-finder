@@ -30,8 +30,6 @@ export const styles = StyleSheet.create({
   addressInfo: {
     overflow: 'hidden',
     paddingBottom: 10,
-    // borderBottomColor: '#A9A9A9',
-    // borderBottomWidth: 1,
   },
   addressText: {
     color: '#000',

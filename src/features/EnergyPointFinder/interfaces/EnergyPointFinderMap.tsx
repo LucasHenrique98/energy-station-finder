@@ -31,7 +31,9 @@ export default function EnergyPointFinderMap() {
   >([]);
   const [isEnergyStationDetailsOpen, setIsEnergyStationDetailsOpen] =
     useState(false);
-  const [energyStationDetails, setEnergyStationDetails] = useState({});
+  const [energyStationDetails, setEnergyStationDetails] = useState<{
+    address?: string;
+  }>({});
 
   const { energyPointsGateway, geocoderService } = useContext(
     DependencyInjectionContext,
@@ -58,7 +60,10 @@ export default function EnergyPointFinderMap() {
   };
 
   const handleEnergyStationMarkerPress = (coords: coordinate) => {
-    getAddressAccordingCoords(geocoderService, coords).then(address => {});
+    getAddressAccordingCoords(geocoderService, coords).then(address => {
+      setEnergyStationDetails(address);
+      setIsEnergyStationDetailsOpen(true);
+    });
   };
 
   useFocusEffect(
@@ -74,7 +79,9 @@ export default function EnergyPointFinderMap() {
   return (
     <View style={styles.container}>
       <SearchBar />
-      <EnergyStationDetails />
+      {isEnergyStationDetailsOpen && (
+        <EnergyStationDetails address={energyStationDetails.address} />
+      )}
       <MapView
         provider="google"
         style={{ width, height }}

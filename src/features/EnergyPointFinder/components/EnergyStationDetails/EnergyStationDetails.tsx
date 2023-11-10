@@ -8,7 +8,13 @@ import {
   faLocationArrow,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function EnergyStationDetails() {
+type EnergyStationDetailsProps = {
+  address?: string;
+};
+
+export default function EnergyStationDetails({
+  address,
+}: EnergyStationDetailsProps) {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -22,9 +28,7 @@ export default function EnergyStationDetails() {
         <View style={styles.innerContent}>
           <View style={styles.infoWrapper}>
             <View style={styles.addressInfo}>
-              <Text style={styles.addressText}>
-                suahsuahushaushauhsuahushua
-              </Text>
+              <Text style={styles.addressText}>{address}</Text>
             </View>
           </View>
 
