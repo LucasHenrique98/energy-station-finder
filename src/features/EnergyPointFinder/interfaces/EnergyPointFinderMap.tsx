@@ -5,7 +5,7 @@ import Geolocation from '@react-native-community/geolocation';
 import { useFocusEffect } from '@react-navigation/native';
 import SearchBar from '../components/SearchBar';
 import { DependencyInjectionContext } from '../../../contexts/DependencyInjection.context';
-import { getAddressAccordingCoords } from '../usecases';
+import { getStationAddressAccordingCoords } from '../usecases';
 import EnergyStationDetails from '../components/EnergyStationDetails/EnergyStationDetails';
 import { styles } from './stylesheet';
 
@@ -60,7 +60,7 @@ export default function EnergyPointFinderMap() {
   };
 
   const handleEnergyStationMarkerPress = (coords: coordinate) => {
-    getAddressAccordingCoords(geocoderService, coords).then(address => {
+    getStationAddressAccordingCoords(geocoderService, coords).then(address => {
       setEnergyStationDetails(address);
       setIsEnergyStationDetailsOpen(true);
     });
