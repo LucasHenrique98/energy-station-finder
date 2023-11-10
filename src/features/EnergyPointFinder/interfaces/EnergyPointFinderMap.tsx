@@ -8,6 +8,9 @@ import { DependencyInjectionContext } from '../../../contexts/DependencyInjectio
 import { getStationAddressAccordingCoords } from '../usecases';
 import EnergyStationDetails from '../components/EnergyStationDetails/EnergyStationDetails';
 import { styles } from './stylesheet';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChargingStation } from '@fortawesome/free-solid-svg-icons';
+import { PRIMARY } from '../../../styles/colors';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -115,7 +118,13 @@ export default function EnergyPointFinderMap() {
               coordinate={{
                 latitude: location.latitude,
                 longitude: location.longitude,
-              }}></Marker>
+              }}>
+              <FontAwesomeIcon
+                color="#3f3f3f"
+                size={25}
+                icon={faChargingStation}
+              />
+            </Marker>
           );
         })}
       </MapView>
