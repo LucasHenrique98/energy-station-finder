@@ -6,6 +6,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import SearchBar from '../components/SearchBar';
 import { DependencyInjectionContext } from '../../../contexts/DependencyInjection.context';
 import { getAddressAccordingCoords } from '../usecases';
+import EnergyStationDetails from '../components/EnergyStationDetails/EnergyStationDetails';
+import { styles } from './stylesheet';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -70,8 +72,9 @@ export default function EnergyPointFinderMap() {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <SearchBar />
+      <EnergyStationDetails />
       <MapView
         provider="google"
         style={{ width, height }}
