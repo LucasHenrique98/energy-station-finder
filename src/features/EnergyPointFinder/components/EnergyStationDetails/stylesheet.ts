@@ -5,22 +5,36 @@ export const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     bottom: 180,
-    width: '100%',
-    borderRadius: 10,
-    elevation: 10,
+    left: 10,
+    right: 10,
     zIndex: 1,
-    // minHeight: 300,
+  },
+  wrapper: {
+    position: 'relative',
+  },
+  innerContent: {
+    borderRadius: 10,
+    overflow: 'hidden',
+    elevation: 20,
+  },
+  closeIcon: {
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    top: -50,
   },
   infoWrapper: {
-    backgroundColor: 'gray',
+    backgroundColor: '#e9e9e9',
     paddingBottom: 5,
     padding: 10,
   },
   addressInfo: {
     overflow: 'hidden',
     paddingBottom: 10,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
+    // borderBottomColor: '#A9A9A9',
+    // borderBottomWidth: 1,
+  },
+  addressText: {
+    color: '#000',
   },
   footer: {
     backgroundColor: '#FFF',
