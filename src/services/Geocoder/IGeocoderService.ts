@@ -5,10 +5,8 @@ export type GeoLocation = {
 
 export type GeoLocationAddressReturn = {
   address: string;
-  number: number;
-  zipCode: string;
-  city: string;
-  state: string;
+  latitude: number;
+  longitude: number;
 };
 
 export interface IGeocoderService {

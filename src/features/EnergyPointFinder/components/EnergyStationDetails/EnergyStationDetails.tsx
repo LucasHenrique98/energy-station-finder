@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Linking } from 'react-native';
 import React from 'react';
 
 import { styles } from './stylesheet';
@@ -7,16 +7,25 @@ import {
   faCircleXmark,
   faLocationArrow,
 } from '@fortawesome/free-solid-svg-icons';
+import { googleMapsUrl } from '../../constants';
 
 type EnergyStationDetailsProps = {
-  address: { address?: string; latitude?: number; longitude?: number };
+  destination: { address: string; latitude: number; longitude: number };
+  origin: { latitude: number; longitude: number; formattedAddress: string };
   closeDetailsModal: () => void;
 };
 
 export default function EnergyStationDetails({
-  address,
+  destination,
   closeDetailsModal,
+  origin,
 }: EnergyStationDetailsProps) {
+  const openAddressOnMap = () => {
+    Linking.openURL(
+      `${googleMapsUrl}&origin=${origin.formattedAddress}&destination=${destination.address}`,
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -30,12 +39,12 @@ export default function EnergyStationDetails({
         <View style={styles.innerContent}>
           <View style={styles.infoWrapper}>
             <View style={styles.addressInfo}>
-              <Text style={styles.addressText}>{address}</Text>
+              <Text style={styles.addressText}>{destination.address}</Text>
             </View>
           </View>
 
           <View style={styles.footer}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={openAddressOnMap} style={styles.button}>
               <Text style={styles.buttonText}>Traçar rota</Text>
               <FontAwesomeIcon
                 style={styles.buttonIcon}

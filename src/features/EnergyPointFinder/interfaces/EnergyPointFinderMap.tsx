@@ -1,11 +1,5 @@
 import React, { useCallback, useState, useContext, useEffect } from 'react';
-import {
-  View,
-  Dimensions,
-  PermissionsAndroid,
-  Platform,
-  Linking,
-} from 'react-native';
+import { View, Dimensions, PermissionsAndroid } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import { useFocusEffect } from '@react-navigation/native';
@@ -16,7 +10,6 @@ import EnergyStationDetails from '../components/EnergyStationDetails/EnergyStati
 import { styles } from './stylesheet';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faChargingStation } from '@fortawesome/free-solid-svg-icons';
-import { PRIMARY } from '../../../styles/colors';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -26,25 +19,33 @@ type coordinate = {
 };
 
 export default function EnergyPointFinderMap() {
-  const [region, setRegion] = useState<
-    | {
-        latitude: number;
-        longitude: number;
-        latitudeDelta: number;
-        longitudeDelta: number;
-      }
-    | undefined
-  >(undefined);
+  const [region, setRegion] = useState<{
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+    formattedAddress: string;
+  }>({
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 0,
+    longitudeDelta: 0,
+    formattedAddress: '',
+  });
   const [energyStationLocations, setEnergyStationLocations] = useState<
     Array<coordinate>
   >([]);
   const [isEnergyStationDetailsOpen, setIsEnergyStationDetailsOpen] =
     useState(false);
   const [energyStationDetails, setEnergyStationDetails] = useState<{
-    address?: string;
-    latitude?: number;
-    longitude?: number;
-  }>({});
+    address: string;
+    latitude: number;
+    longitude: number;
+  }>({
+    address: '',
+    latitude: 0,
+    longitude: 0,
+  });
 
   const { energyPointsGateway, geocoderService } = useContext(
     DependencyInjectionContext,
@@ -58,11 +59,17 @@ export default function EnergyPointFinderMap() {
   const getCurrentPosition = () => {
     Geolocation.getCurrentPosition(
       info => {
-        setRegion({
+        getStationAddressAccordingCoords(geocoderService, {
           latitude: info.coords.latitude,
           longitude: info.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+        }).then(addressInfo => {
+          setRegion({
+            latitude: info.coords.latitude,
+            longitude: info.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+            formattedAddress: addressInfo.address,
+          });
         });
       },
       () => {},
@@ -98,7 +105,8 @@ export default function EnergyPointFinderMap() {
       {isEnergyStationDetailsOpen && (
         <EnergyStationDetails
           closeDetailsModal={closeEnergyStationModal}
-          address={energyStationDetails}
+          destination={energyStationDetails}
+          origin={region}
         />
       )}
       <MapView

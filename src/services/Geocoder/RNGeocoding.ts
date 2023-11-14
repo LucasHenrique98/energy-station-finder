@@ -14,10 +14,8 @@ export class RNGeocoding implements IGeocoderService {
 
     return {
       address: formattedAddress,
-      city: '',
-      number: 1,
-      state: '',
-      zipCode: '',
+      latitude: coords.latitude,
+      longitude: coords.longitude,
     };
   }
 }
