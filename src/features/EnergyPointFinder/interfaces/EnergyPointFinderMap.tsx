@@ -1,5 +1,11 @@
 import React, { useCallback, useState, useContext, useEffect } from 'react';
-import { View, Dimensions, PermissionsAndroid } from 'react-native';
+import {
+  View,
+  Dimensions,
+  PermissionsAndroid,
+  Platform,
+  Linking,
+} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import { useFocusEffect } from '@react-navigation/native';
@@ -36,6 +42,8 @@ export default function EnergyPointFinderMap() {
     useState(false);
   const [energyStationDetails, setEnergyStationDetails] = useState<{
     address?: string;
+    latitude?: number;
+    longitude?: number;
   }>({});
 
   const { energyPointsGateway, geocoderService } = useContext(
@@ -90,7 +98,7 @@ export default function EnergyPointFinderMap() {
       {isEnergyStationDetailsOpen && (
         <EnergyStationDetails
           closeDetailsModal={closeEnergyStationModal}
-          address={energyStationDetails.address}
+          address={energyStationDetails}
         />
       )}
       <MapView

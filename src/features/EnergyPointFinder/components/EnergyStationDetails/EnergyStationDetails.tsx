@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 type EnergyStationDetailsProps = {
-  address?: string;
+  address: { address?: string; latitude?: number; longitude?: number };
   closeDetailsModal: () => void;
 };
 
