@@ -38,11 +38,11 @@ export default function EnergyPointFinderMap() {
   const [isEnergyStationDetailsOpen, setIsEnergyStationDetailsOpen] =
     useState(false);
   const [energyStationDetails, setEnergyStationDetails] = useState<{
-    address: string;
+    formattedAddress: string;
     latitude: number;
     longitude: number;
   }>({
-    address: '',
+    formattedAddress: '',
     latitude: 0,
     longitude: 0,
   });
@@ -68,7 +68,7 @@ export default function EnergyPointFinderMap() {
             longitude: info.coords.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
-            formattedAddress: addressInfo.address,
+            formattedAddress: addressInfo.formattedAddress,
           });
         });
       },

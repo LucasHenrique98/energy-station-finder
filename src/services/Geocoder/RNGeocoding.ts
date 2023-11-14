@@ -13,7 +13,7 @@ export class RNGeocoding implements IGeocoderService {
     const formattedAddress = results[0].formatted_address;
 
     return {
-      address: formattedAddress,
+      formattedAddress: formattedAddress,
       latitude: coords.latitude,
       longitude: coords.longitude,
     };

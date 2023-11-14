@@ -10,7 +10,11 @@ import {
 import { googleMapsUrl } from '../../constants';
 
 type EnergyStationDetailsProps = {
-  destination: { address: string; latitude: number; longitude: number };
+  destination: {
+    formattedAddress: string;
+    latitude: number;
+    longitude: number;
+  };
   origin: { latitude: number; longitude: number; formattedAddress: string };
   closeDetailsModal: () => void;
 };
@@ -22,7 +26,7 @@ export default function EnergyStationDetails({
 }: EnergyStationDetailsProps) {
   const openAddressOnMap = () => {
     Linking.openURL(
-      `${googleMapsUrl}&origin=${origin.formattedAddress}&destination=${destination.address}`,
+      `${googleMapsUrl}&origin=${origin.formattedAddress}&destination=${destination.formattedAddress}`,
     );
   };
 
@@ -39,7 +43,9 @@ export default function EnergyStationDetails({
         <View style={styles.innerContent}>
           <View style={styles.infoWrapper}>
             <View style={styles.addressInfo}>
-              <Text style={styles.addressText}>{destination.address}</Text>
+              <Text style={styles.addressText}>
+                {destination.formattedAddress}
+              </Text>
             </View>
           </View>
 

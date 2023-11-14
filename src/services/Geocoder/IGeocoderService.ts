@@ -4,7 +4,7 @@ export type GeoLocation = {
 };
 
 export type GeoLocationAddressReturn = {
-  address: string;
+  formattedAddress: string;
   latitude: number;
   longitude: number;
 };
