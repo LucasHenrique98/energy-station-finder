@@ -3,10 +3,12 @@ import React, { useRef, useState } from 'react';
 import { styles } from './stylesheet';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export default function SearchBar() {
   const [isFocused, setIsFocused] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const { t } = useTranslation();
 
   const textInputRef = useRef<TextInput>(null);
 
@@ -31,7 +33,7 @@ export default function SearchBar() {
             placeholderTextColor={'#d3d3d8'}
             onChangeText={text => setSearchText(text)}
             style={[styles.textInput, styles.commonTextInputStyle]}
-            placeholder="Nome do local, estação ou endereço"
+            placeholder={t('searchCategories')}
           />
           <TouchableOpacity
             style={styles.closeIcon}
@@ -44,7 +46,7 @@ export default function SearchBar() {
           <Text
             onPress={handlePlaceholderViewTextPress}
             style={styles.commonTextInputStyle}>
-            Pesquisar endereço
+            {t('search')}
           </Text>
         </View>
       )}

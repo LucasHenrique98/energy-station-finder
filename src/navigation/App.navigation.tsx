@@ -6,10 +6,13 @@ import { faChargingStation } from '@fortawesome/free-solid-svg-icons';
 import EnergyPointFinderMap from '../features/EnergyPointFinder/interfaces/EnergyPointFinderMap';
 import { PRIMARY } from '../styles/colors';
 import { Text } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 const Tab = createBottomTabNavigator();
 
 export default function AppNavigation(): JSX.Element {
+  const { t } = useTranslation();
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -27,7 +30,7 @@ export default function AppNavigation(): JSX.Element {
               style={{
                 color: PRIMARY,
               }}>
-              Estações
+              {t('stations')}
             </Text>
           ),
           tabBarIcon: () => (

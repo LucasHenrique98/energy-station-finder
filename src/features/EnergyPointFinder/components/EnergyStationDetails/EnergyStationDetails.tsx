@@ -7,6 +7,7 @@ import {
   faCircleXmark,
   faLocationArrow,
 } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 import { googleMapsUrl } from '../../constants';
 
 type EnergyStationDetailsProps = {
@@ -24,6 +25,8 @@ export default function EnergyStationDetails({
   closeDetailsModal,
   origin,
 }: EnergyStationDetailsProps) {
+  const { t } = useTranslation();
+
   const openAddressOnMap = () => {
     Linking.openURL(
       `${googleMapsUrl}&origin=${origin.formattedAddress}&destination=${destination.formattedAddress}`,
@@ -51,7 +54,7 @@ export default function EnergyStationDetails({
 
           <View style={styles.footer}>
             <TouchableOpacity onPress={openAddressOnMap} style={styles.button}>
-              <Text style={styles.buttonText}>Traçar rota</Text>
+              <Text style={styles.buttonText}>{t('createRoute')}</Text>
               <FontAwesomeIcon
                 style={styles.buttonIcon}
                 icon={faLocationArrow}
