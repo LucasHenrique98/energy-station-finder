@@ -4,6 +4,7 @@ import RNLanguageDetector from '@os-team/i18next-react-native-language-detector'
 
 import en from './en-us.json';
 import pt from './pt-br.json';
+import es from './es.json';
 
 i18n
   .use(RNLanguageDetector)
@@ -14,6 +15,7 @@ i18n
     resources: {
       en,
       pt,
+      es,
     },
     react: {
       useSuspense: false,
